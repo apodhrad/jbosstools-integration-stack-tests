@@ -10,16 +10,22 @@
  ******************************************************************************/
 package org.jboss.tools.jbpm.ui.bot.test;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.InputEvent;
+
 import org.eclipse.swtbot.eclipse.finder.SWTWorkbenchBot;
 import org.eclipse.swtbot.eclipse.finder.widgets.SWTBotMultiPageEditor;
 import org.eclipse.swtbot.swt.finder.SWTBotTestCase;
 import org.jboss.reddeer.eclipse.jdt.ui.ProjectExplorer;
+import org.jboss.reddeer.junit.logging.Logger;
 import org.jboss.reddeer.swt.condition.ShellWithTextIsAvailable;
 import org.jboss.reddeer.swt.impl.button.CheckBox;
 import org.jboss.reddeer.swt.impl.button.PushButton;
 import org.jboss.reddeer.swt.impl.menu.ShellMenu;
 import org.jboss.reddeer.swt.impl.shell.DefaultShell;
 import org.jboss.reddeer.swt.impl.text.LabeledText;
+import org.jboss.reddeer.swt.wait.AbstractWait;
 import org.jboss.reddeer.swt.wait.WaitWhile;
 import org.jboss.tools.jbpm.ui.bot.test.editor.JBPMEditor;
 import org.jboss.tools.jbpm.ui.bot.test.suite.CleanWorkspaceRequirement.CleanWorkspace;
@@ -40,11 +46,16 @@ import org.junit.Test;
 public class JBPMDeployTest extends SWTBotTestCase {
 
 	public static final String PROJECT = "deploytest";
-
+	
 	protected static SWTWorkbenchBot bot = new SWTWorkbenchBot();
 
+    private static final Logger log = Logger.getLogger(JBPMDeployTest.class);
+    
 	@BeforeClass
 	public static void createProject() {
+		/* Get Focus */
+		hack_MacOSX_ReturnFocus();
+		
 		/* Create jBPM3 Project */
 		JBPMProjectWizard projectWizard = new JBPMProjectWizard();
 		projectWizard.open();
@@ -93,4 +104,24 @@ public class JBPMDeployTest extends SWTBotTestCase {
 
 		// TODO - check via jpdl console
 	}
+	
+	/**
+     * Hack for Mac OS X
+     * Returns focus from Apache.karaf.main back to IDE (after starting server)
+     */
+    private static void hack_MacOSX_ReturnFocus() {
+    	if (System.getProperty("os.name").toLowerCase().indexOf("mac") >= 0) {
+    		try {
+    			Robot robot = new Robot();
+                robot.mouseMove(200, 200);
+                robot.mousePress(InputEvent.BUTTON1_MASK);
+                robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                AbstractWait.sleep(1000);
+                robot.mousePress(InputEvent.BUTTON1_MASK);
+                robot.mouseRelease(InputEvent.BUTTON1_MASK);
+                } catch (AWTException e) {
+                	log.error("Error during click into IDE (OS X)", e);
+                }
+            }
+    }
 }
