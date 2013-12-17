@@ -20,6 +20,21 @@
 	  <maven-download-plugin.version>1.0.0</maven-download-plugin.version>
 	</properties>
 
+	<repositories>
+	  <!-- SwitchYard Repository -->
+	  <repository>
+	    <id>switchyard</id>
+	    <url>http://download.jboss.org/jbosstools/updates/integration/juno/soa-tooling/switchyard/1.1.2</url>
+	    <layout>p2</layout>
+	    <snapshots>
+	      <enabled>true</enabled>
+	    </snapshots>
+	    <releases>
+	      <enabled>true</enabled>
+	    </releases>
+	  </repository>
+	</repositories>
+	
 	<build>
 	  <plugins>
 	    <!-- SwitchYard Bot Tests -->
