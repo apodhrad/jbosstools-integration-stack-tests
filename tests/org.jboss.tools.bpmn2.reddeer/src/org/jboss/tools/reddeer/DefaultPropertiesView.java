@@ -130,12 +130,12 @@ public class DefaultPropertiesView extends WorkbenchView {
 		bot.menu("Window").menu("Navigation").menu("Minimize Active View or Editor").click();
 	}
 	
-	@Override
-	public void maximize() {
-		SWTWorkbenchBot bot = new SWTWorkbenchBot();
-		activateShell(bot);
-		bot.menu("Window").menu("Navigation").menu("Maximize Active View or Editor").click();
-	}
+//	@Override
+//	public void maximize() {
+//		SWTWorkbenchBot bot = new SWTWorkbenchBot();
+//		activateShell(bot);
+//		bot.menu("Window").menu("Navigation").menu("Maximize Active View or Editor").click();
+//	}
 	
 	private class ListElement {
 
