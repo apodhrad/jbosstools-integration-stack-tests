@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun xmlns="http://www.jboss.org/NS/Req" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:db="http://www.jboss.org/NS/db-schema" xmlns:server="http://www.jboss.org/NS/ServerReq"
+	xsi:schemaLocation="http://www.jboss.org/NS/Req http://www.jboss.org/schema/reddeer/RedDeerSchema.xsd
+                            http://www.jboss.org/NS/ServerReq http://localhost/schema/SwitchYardServerRequirement.xsd">
+
+	<requirements>
+		<!-- Example server configuration -->
+		<server:server-requirement name="FSW-6.0.0.GA">
+			<server:type>
+				<server:familyEAP version="6.1+" />
+			</server:type>
+			<server:runtime>/home/apodhrad/Projects/server-installer/fsw-6.0.0.GA/target/jboss-eap-6.1</server:runtime>
+		</server:server-requirement>
+	</requirements>
+</testrun>

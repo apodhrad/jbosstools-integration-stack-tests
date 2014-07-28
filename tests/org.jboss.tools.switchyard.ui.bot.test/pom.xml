@@ -13,7 +13,7 @@
 
 	<properties>
 	  <swtbot.properties>./swtbot.properties</swtbot.properties>
-	  <systemProperties>${integrationTestsSystemProperties} -Dswtbot.test.properties.file=${swtbot.properties}</systemProperties>
+	  <systemProperties>${integrationTestsSystemProperties} -Dswtbot.test.properties.file=${swtbot.properties} -Dreddeer.config=resources/server-config</systemProperties>
 	  <surefire.timeout>10800</surefire.timeout>
 	  <test.class>AllTests</test.class>
 	  <maven-download-plugin.version>1.0.0</maven-download-plugin.version>

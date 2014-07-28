@@ -12,7 +12,6 @@ import org.jboss.reddeer.requirements.cleanworkspace.CleanWorkspaceRequirement.C
 import org.jboss.reddeer.requirements.openperspective.OpenPerspectiveRequirement.OpenPerspective;
 import org.jboss.reddeer.swt.impl.menu.ShellMenu;
 import org.jboss.reddeer.swt.impl.text.LabeledText;
-import org.jboss.reddeer.swt.test.RedDeerTest;
 import org.jboss.reddeer.swt.wait.AbstractWait;
 import org.jboss.tools.switchyard.reddeer.component.Drools;
 import org.jboss.tools.switchyard.reddeer.component.Service;
@@ -35,7 +34,7 @@ import org.junit.runner.RunWith;
 @CleanWorkspace
 @OpenPerspective(JavaEEPerspective.class)
 @RunWith(SwitchyardSuite.class)
-public class DroolsTest extends RedDeerTest {
+public class DroolsTest {
 
 	private static final String PROJECT = "switchyard-drools-interview";
 	private static final String PACKAGE = "org.switchyard.quickstarts.drools.service";
