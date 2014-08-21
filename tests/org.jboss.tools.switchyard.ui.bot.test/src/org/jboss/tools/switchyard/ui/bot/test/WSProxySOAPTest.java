@@ -111,6 +111,7 @@ public class WSProxySOAPTest {
 
 		/* Test Web Service Proxy */
 		new Service("Hello").newServiceTestClass().setPackage(PACKAGE).selectMixin("HTTP Mix-in").finish();
+		
 		new TextEditor("HelloTest.java")
 				.deleteLineWith("Object message")
 				.deleteLineWith("Object result")
@@ -121,6 +122,7 @@ public class WSProxySOAPTest {
 
 		new WaitWhile(new JobIsRunning(), TimePeriod.LONG);
 
+		new SwitchYardEditor().save();
 		ProjectItem item = new ProjectExplorer().getProject(PROJECT).getProjectItem("src/test/java", PACKAGE,
 				"HelloTest.java");
 		new ProjectItemExt(item).runAsJUnitTest();
