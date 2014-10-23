@@ -15,6 +15,7 @@ import org.jboss.reddeer.swt.wait.WaitUntil;
 import org.jboss.reddeer.swt.wait.WaitWhile;
 import org.jboss.tools.switchyard.reddeer.component.SwitchYardComponent;
 import org.jboss.tools.switchyard.reddeer.preference.CompositePropertiesPage;
+import org.jboss.tools.switchyard.reddeer.wizard.BPELServiceWizard;
 import org.jboss.tools.switchyard.reddeer.wizard.BPMServiceWizard;
 import org.jboss.tools.switchyard.reddeer.wizard.BeanServiceWizard;
 import org.jboss.tools.switchyard.reddeer.wizard.CamelJavaWizard;
@@ -114,13 +115,15 @@ public class SwitchYardEditor extends GEFEditor {
 		return new CamelXMLWizard(this);
 	}
 
-	public void addBPELImplementation() {
+	public BPELServiceWizard addBPELImplementation() {
 		addBPELImplementation(composite);
+		return new BPELServiceWizard(this);
 	}
 
-	public void addBPELImplementation(EditPart editPart) {
+	public BPELServiceWizard addBPELImplementation(EditPart editPart) {
 		getPalette().activateTool(TOOL_BPEL);
 		editPart.click();
+		return new BPELServiceWizard(this);
 	}
 
 	public BPMServiceWizard addBPMNImplementation() {

@@ -12,29 +12,41 @@ import org.jboss.reddeer.swt.wait.WaitUntil;
  * @author apodhrad
  * 
  */
-public class CamelXMLWizard extends ServiceWizard<CamelXMLWizard> {
+public class BPELServiceWizard extends ServiceWizard<BPELServiceWizard> {
 
 	public static final String DIALOG_TITLE = "New File";
+	public static final String NAMESPACE = "Namespace:";
 
+	public static final String FILE = "Name:";
 	public static final String FILE_NAME = "File name:";
 
 	private GEFEditor editor;
 
-	public CamelXMLWizard() {
+	public BPELServiceWizard() {
 		super(DIALOG_TITLE);
 	}
 
-	public CamelXMLWizard(GEFEditor editor) {
+	public BPELServiceWizard(GEFEditor editor) {
 		super(DIALOG_TITLE);
 		this.editor = editor;
 	}
 
-	public CamelXMLWizard setFileName(String name) {
+	public BPELServiceWizard setFileName(String name) {
 		new LabeledText(FILE_NAME).setText(name);
 		return this;
 	}
 
-	public CamelXMLWizard selectResource(String... path) {
+	public BPELServiceWizard setProcessName(String name) {
+		new LabeledText(FILE).setText(name);
+		return this;
+	}
+
+	public BPELServiceWizard setProcessNamespace(String name) {
+		new LabeledText(NAMESPACE).setText(name);
+		return this;
+	}
+
+	public BPELServiceWizard selectResource(String... path) {
 		new DefaultTreeItem(path).select();
 		return this;
 	}
