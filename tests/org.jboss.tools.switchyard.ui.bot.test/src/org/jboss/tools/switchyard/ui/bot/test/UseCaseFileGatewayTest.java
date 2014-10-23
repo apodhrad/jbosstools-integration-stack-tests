@@ -36,7 +36,7 @@ import org.junit.runner.RunWith;
 @SwitchYard(server = @Server(type = ServerReqType.ANY, state = ServerReqState.RUNNING))
 @OpenPerspective(JavaEEPerspective.class)
 @RunWith(RedDeerSuite.class)
-public class FileGatewayTest {
+public class UseCaseFileGatewayTest {
 
 	public static final String PROJECT = "file_project";
 	public static final String PACKAGE = "com.example.switchyard.file_project";
