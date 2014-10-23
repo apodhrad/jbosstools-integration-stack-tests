@@ -95,7 +95,7 @@ public class TopDownBPMN2Test {
 		new SwitchYardEditor().autoLayout();
 		new SwitchYardEditor().save();
 
-		new SwitchYardEditor().addBeanImplementation().createNewInterface(EVAL_GREET).finish();
+		new SwitchYardEditor().addBeanImplementation().createJavaInterface(EVAL_GREET).finish();
 		new SwitchYardEditor().save();
 
 		// reference to bean

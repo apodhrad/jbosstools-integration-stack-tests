@@ -93,7 +93,7 @@ public class SwitchYardEditor extends GEFEditor {
 
 	public BeanServiceWizard addBeanImplementation(EditPart editPart) {
 		addTool(TOOL_BEAN, editPart);
-		return new BeanServiceWizard();
+		return new BeanServiceWizard(this);
 	}
 
 	public CamelJavaWizard addCamelJavaImplementation() {

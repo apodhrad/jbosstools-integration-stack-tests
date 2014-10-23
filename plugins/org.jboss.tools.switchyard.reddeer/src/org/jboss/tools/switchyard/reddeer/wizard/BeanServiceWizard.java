@@ -1,9 +1,10 @@
 package org.jboss.tools.switchyard.reddeer.wizard;
 
-import org.jboss.reddeer.jface.wizard.WizardDialog;
-import org.jboss.reddeer.swt.impl.shell.DefaultShell;
+import org.jboss.reddeer.gef.condition.EditorHasEditParts;
+import org.jboss.reddeer.gef.editor.GEFEditor;
+import org.jboss.reddeer.swt.impl.button.PushButton;
 import org.jboss.reddeer.swt.impl.text.LabeledText;
-import org.jboss.tools.switchyard.reddeer.widget.Link;
+import org.jboss.reddeer.swt.wait.WaitUntil;
 
 /**
  * Wizard for creating a bean service.
@@ -11,16 +12,15 @@ import org.jboss.tools.switchyard.reddeer.widget.Link;
  * @author apodhrad
  * 
  */
-public class BeanServiceWizard extends WizardDialog {
+public class BeanServiceWizard extends ServiceWizard<BeanServiceWizard> {
 
 	public static final String DIALOG_TITLE = "New Bean Service";
 
-	public BeanServiceWizard() {
-	}
+	private GEFEditor editor;
 
-	public BeanServiceWizard activate() {
-		new DefaultShell(DIALOG_TITLE);
-		return this;
+	public BeanServiceWizard(GEFEditor editor) {
+		super(DIALOG_TITLE);
+		this.editor = editor;
 	}
 
 	public BeanServiceWizard setName(String name) {
@@ -29,15 +29,17 @@ public class BeanServiceWizard extends WizardDialog {
 		return this;
 	}
 
-	public BeanServiceWizard createNewInterface(String name) {
+	@Override
+	protected void browse() {
+		new PushButton(2).click();
+	}
+
+	@Override
+	public void finish() {
+		int oldCount = editor.getNumberOfEditParts();
 		activate();
-		new Link("Interface:").click();
-		new JavaInterfaceWizard().activate().setName(name).finish();
-		return this;
+		super.finish();
+		new WaitUntil(new EditorHasEditParts(editor, oldCount));
+		editor.save();
 	}
-
-	public BeanServiceWizard setExistingInterface(String name) {
-		throw new UnsupportedOperationException();
-	}
-
 }

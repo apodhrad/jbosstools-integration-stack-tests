@@ -78,7 +78,7 @@ public class UseCaseSimpleTest {
 	public void simpleTest() throws Exception {
 		switchyardRequirement.project(PROJECT).impl("Bean").binding("SOAP").create();
 
-		new SwitchYardEditor().addBeanImplementation().createNewInterface("ExampleService").finish();
+		new SwitchYardEditor().addBeanImplementation().createJavaInterface("ExampleService").finish();
 
 		new SwitchYardComponent("ExampleService").doubleClick();
 		new TextEditor("ExampleService.java").typeAfter("interface",
