@@ -51,7 +51,7 @@ import org.junit.runner.RunWith;
 @CleanWorkspace
 @OpenPerspective(DebugPerspective.class)
 @RunWith(RedDeerSuite.class)
-public class DebuggerTest {
+public class DebuggerDebuggingTest {
 
 	private static final String RESOURCES = Activator.getDefault().getResourcesPath();
 

@@ -52,7 +52,7 @@ import org.junit.runner.RunWith;
 @SwitchYard
 @OpenPerspective(DebugPerspective.class)
 @RunWith(RedDeerSuite.class)
-public class BreakpointTest {
+public class DebuggerBreakpointTest {
 
 	// TODO Add test for checking whether checkboxes (triggering phases) are
 	// enabled/disabled
