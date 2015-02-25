@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+                <groupId>org.jboss.tools.integration-stack-tests</groupId>
+		<artifactId>tests</artifactId>
+		<version>4.2.0-SNAPSHOT</version>
+	</parent>
+	<groupId>org.jboss.tools.smoke</groupId>
+	<artifactId>org.jboss.tools.smoke.ui.bot.test</artifactId>
+	<packaging>eclipse-test-plugin</packaging>
+
+	<properties>
+	  <reddeer.config>${project.build.directory}/config/smoke.xml</reddeer.config>
+	  <systemProperties>${integrationTestsSystemProperties} -Dreddeer.config=${reddeer.config}</systemProperties>
+	  <surefire.timeout>10800</surefire.timeout>
+	  <test.class>SmokeTests</test.class>
+	  <customization.file>resources/settings/plugin_customization.ini</customization.file>
+	</properties>
+
+	<build>
+	  <plugins>
+	    <!-- Smoke Bot Tests -->
+	    <plugin>
+	      <groupId>org.eclipse.tycho</groupId>
+	      <artifactId>tycho-surefire-plugin</artifactId>
+	      <configuration>
+		<appArgLine>-eclipse.password resources/security/password -pluginCustomization ${customization.file} -clean</appArgLine>
+		<testSuite>org.jboss.tools.smoke.ui.bot.test</testSuite>
+		<testClass>org.jboss.tools.smoke.ui.bot.test.suite.${test.class}</testClass>
+		<useUIThread>false</useUIThread>
+		<skip>${skipTests}</skip>
+		<dependencies combine.children="append">
+		  <!-- AS fature -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.jboss.ide.eclipse.as.feature.feature.group</artifactId>
+		    <version>0.0.0</version>
+		  </dependency>
+		  <!-- WS fature -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.jboss.tools.ws.feature.feature.group</artifactId>
+		    <version>0.0.0</version>
+		  </dependency>
+		  <!-- This entry should enable creating of default JDK on Mac -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.eclipse.jdt.feature.group</artifactId>
+		    <version>0.0.0</version>
+		  </dependency>
+		  <!-- SwitchYard feature -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.switchyard.tools.feature.feature.group</artifactId>
+		    <version>2.0.0</version>
+		  </dependency>
+		  <!-- SwitchYard BPEL feature -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.switchyard.tools.bpel.feature.feature.group</artifactId>
+		    <version>2.0.0</version>
+		  </dependency>
+		  <!-- SwitchYard BPMN2 feature -->
+		  <dependency>
+		    <type>p2-installable-unit</type>
+		    <artifactId>org.switchyard.tools.bpmn2.feature.feature.group</artifactId>
+		    <version>2.0.0</version>
+		  </dependency>
+		</dependencies>
+	      </configuration>
+	    </plugin>
+	    <!-- Copy resources and replace variables with its values -->
+	    <plugin>
+	      <artifactId>maven-resources-plugin</artifactId>
+	      <version>2.6</version>
+	      <executions>
+	        <execution>
+                  <id>copy-resources</id>
+	          <phase>validate</phase>
+	          <goals>
+	            <goal>copy-resources</goal>
+	          </goals>
+	          <configuration>
+	            <encoding>UTF-8</encoding>
+	            <outputDirectory>${project.build.directory}</outputDirectory>
+	            <resources>          
+	              <resource>
+	                <directory>resources</directory>
+			<includes>
+			  <include>config/*</include>
+			</includes>
+	                <filtering>true</filtering>
+	              </resource>
+	            </resources>
+	          </configuration>            
+	        </execution>
+	      </executions>
+	    </plugin>
+	  </plugins>
+	</build>
+	
+      </project>
+      

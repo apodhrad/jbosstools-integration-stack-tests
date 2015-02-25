@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Smoke Bot Tests
+Bundle-SymbolicName: org.jboss.tools.smoke.ui.bot.test
+Bundle-Version: 4.2.0.qualifier
+Bundle-Activator: org.jboss.tools.smoke.ui.bot.test.Activator
+Bundle-ActivationPolicy: lazy
+Import-Package: org.apache.log4j,
+ org.eclipse.draw2d.geometry
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-Vendor: JBoss by Red Hat
+Eclipse-RegisterBuddy: org.apache.log4j
+Eclipse-BundleShape: dir
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.osgi,
+ org.eclipse.core.runtime,
+ org.junit;bundle-version="4.10.0",
+ org.jboss.tools.switchyard.ui.bot.test;bundle-version="4.2.0",
+ org.jboss.reddeer.junit;bundle-version="0.6.0"

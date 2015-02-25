@@ -31,6 +31,7 @@
 		<module>org.jboss.tools.drools.ui.bot.test</module>
 		<module>org.jboss.tools.fuse.ui.bot.test</module>
 		<module>org.jboss.tools.bpmn2.ui.bot.test</module>
+		<module>org.jboss.tools.smoke.ui.bot.test</module>
 	</modules>
 	<profiles>
 		<profile>
