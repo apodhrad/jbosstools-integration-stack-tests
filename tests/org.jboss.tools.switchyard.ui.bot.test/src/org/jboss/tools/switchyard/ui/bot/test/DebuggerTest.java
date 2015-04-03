@@ -1,5 +1,6 @@
 package org.jboss.tools.switchyard.ui.bot.test;
 
+import static org.jboss.tools.switchyard.reddeer.project.ProjectItemExt.Configuration.JUNIT_TEST;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -33,12 +34,10 @@ import org.jboss.tools.switchyard.reddeer.debug.DebugView;
 import org.jboss.tools.switchyard.reddeer.debug.ResumeButton;
 import org.jboss.tools.switchyard.reddeer.debug.TerminateButton;
 import org.jboss.tools.switchyard.reddeer.debug.VariablesView;
-import org.jboss.tools.switchyard.reddeer.project.ProjectItemExt.Configuration;
 import org.jboss.tools.switchyard.reddeer.project.SwitchYardProject;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -52,6 +51,10 @@ import org.junit.runner.RunWith;
 @OpenPerspective(DebugPerspective.class)
 @RunWith(RedDeerSuite.class)
 public class DebuggerTest {
+
+	public static final String PACKAGE = "com.example.switchyard.hello";
+	public static final String HELLO_TEST = "HelloTest.java";
+	public static final String HELLO_SERVICE_TEST = "HelloServiceTest.java";
 
 	private static final String RESOURCES = Activator.getDefault().getResourcesPath();
 
@@ -93,10 +96,6 @@ public class DebuggerTest {
 
 	// TODO Add test which without any transformer checked
 
-	// TODO This test causes different unexpected problems such as Breakpoint
-	// Error, disabling resume button after immediate after suspend or causes
-	// that all variable names are blank
-	@Ignore
 	@Test
 	public void transformDebugTest() {
 		// add transform breakpoint
@@ -108,20 +107,20 @@ public class DebuggerTest {
 		assertEquals("No breakpoint found", 1, breakpoints.size());
 		Breakpoint breakpoint = breakpoints.get(0);
 		assertEquals("Transform Breakpoint: hello", breakpoint.getText());
-		breakpoint.checkTransformer("String {java.lang}", "Person {com.example.switchyard.hello}");
+		breakpoint.uncheckTransformer("String {java.lang}", "Person {com.example.switchyard.hello}");
 
 		// run as junit test
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_SERVICE_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("TransformSequence.apply(Message, TransformerRegistry) line: 103",
 				new DebugView().getSelectedText());
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("TransformSequence.apply(Message, TransformerRegistry) line: 103",
 				new DebugView().getSelectedText());
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("TransformSequence.apply(Message, TransformerRegistry) line: 103",
 				new DebugView().getSelectedText());
 		new ResumeButton().click();
@@ -142,18 +141,18 @@ public class DebuggerTest {
 		assertEquals("Validate Breakpoint: hello", breakpoints.get(0).getText());
 
 		// run as junit test
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_SERVICE_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ValidateHandler.handleMessage(Exchange) line: 66", new DebugView().getSelectedText());
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ValidateHandler.handleMessage(Exchange) line: 66", new DebugView().getSelectedText());
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ValidateHandler.handleMessage(Exchange) line: 66", new DebugView().getSelectedText());
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ValidateHandler.handleMessage(Exchange) line: 66", new DebugView().getSelectedText());
 		new ResumeButton().click();
 		new WaitUntil(new IsTerminated(), TimePeriod.LONG);
@@ -183,14 +182,14 @@ public class DebuggerTest {
 		assertBreakpoint(breakpoint, TriggerOn.VALIDATION, false);
 		assertBreakpoint(breakpoint, TriggerOn.TRANSFORMATION, false);
 
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_SERVICE_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("InterceptProcessor.process(Exchange) line: 61", new DebugView().getSelectedText());
 		System.out.println(new VariablesView().getValue("ex"));
 		assertEquals("Exchange[Message: Johnny Cash]", new VariablesView().getValue("ex"));
 		new ResumeButton().click();
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ConsumerCallbackProcessor.process(Exchange) line: 30", new DebugView().getSelectedText());
 		assertEquals("Exchange[Message: Hello Johnny Cash]", new VariablesView().getValue("ex"));
 		new ResumeButton().click();
@@ -226,9 +225,9 @@ public class DebuggerTest {
 		AbstractWait.sleep(TimePeriod.SHORT);
 		assertEquals("SwitchYard CONSUMER: HelloService on [IN, FAULT]", breakpoint.getText());
 
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_SERVICE_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("InterceptProcessor.process(Exchange) line: 61", new DebugView().getSelectedText());
 		assertEquals("Exchange[Message: Johnny Cash]", new VariablesView().getValue("ex"));
 		new ResumeButton().click();
@@ -264,9 +263,9 @@ public class DebuggerTest {
 		AbstractWait.sleep(TimePeriod.SHORT);
 		assertEquals("SwitchYard CONSUMER: HelloService on [OUT, FAULT]", breakpoint.getText());
 
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_SERVICE_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		assertEquals("ConsumerCallbackProcessor.process(Exchange) line: 30", new DebugView().getSelectedText());
 		assertEquals("Exchange[Message: Hello Johnny Cash]", new VariablesView().getValue("ex"));
 		new ResumeButton().click();
@@ -297,9 +296,9 @@ public class DebuggerTest {
 		assertBreakpoint(breakpoint, TriggerOn.VALIDATION, false);
 		assertBreakpoint(breakpoint, TriggerOn.TRANSFORMATION, false);
 
-		new SwitchYardProject("hello").getTestClass("com.example.switchyard.hello", "HelloTest.java").debugAs(
-				Configuration.JUNIT_TEST);
-		new WaitUntil(new IsSuspended(), TimePeriod.LONG);
+		IsSuspended isSuspended = new IsSuspended();
+		new SwitchYardProject("hello").getTestClass(PACKAGE, HELLO_TEST).debugAs(JUNIT_TEST);
+		new WaitUntil(isSuspended, TimePeriod.LONG);
 		new TerminateButton().click();
 	}
 
