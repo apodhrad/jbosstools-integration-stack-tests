@@ -9,7 +9,10 @@ import org.jboss.reddeer.swt.impl.shell.DefaultShell;
 import org.jboss.reddeer.swt.impl.toolbar.DefaultToolItem;
 import org.jboss.reddeer.swt.impl.toolbar.ViewToolItem;
 import org.jboss.reddeer.swt.impl.tree.DefaultTree;
+import org.jboss.reddeer.swt.wait.TimePeriod;
+import org.jboss.reddeer.swt.wait.WaitUntil;
 import org.jboss.reddeer.workbench.impl.view.WorkbenchView;
+import org.jboss.tools.switchyard.reddeer.condition.TreeItemHasText;
 
 /**
  * 
@@ -32,6 +35,7 @@ public class BreakpointsView extends WorkbenchView {
 		List<Breakpoint> breakpoints = new ArrayList<Breakpoint>();
 		List<TreeItem> treeItems = new DefaultTree().getItems();
 		for (TreeItem treeItem : treeItems) {
+			new WaitUntil(new TreeItemHasText(treeItem), TimePeriod.NORMAL);
 			breakpoints.add(new Breakpoint(treeItem.getText()));
 		}
 		return breakpoints;
