@@ -43,7 +43,11 @@ public abstract class ExistingServiceWizard<T extends ExistingServiceWizard<?>> 
 		new PushButton("Browse...").click();
 		new DefaultShell(getSelectionDialogTitle());
 		new DefaultText().setText(impl);
+		try {
 		new WaitUntil(new TableHasRow(new DefaultTable(), new RegexMatcher(".*" + impl + ".*")));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		new PushButton("OK").click();
 		new WaitWhile(new ShellWithTextIsActive(getSelectionDialogTitle()));
 		return activate();
