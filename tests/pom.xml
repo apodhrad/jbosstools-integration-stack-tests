@@ -14,6 +14,7 @@
   
   <properties>
     <surefire.timeout>10800</surefire.timeout>
+	<memoryOptions1>-Xms512m -Xmx1024m -XX:PermSize=256m</memoryOptions1>
     <memoryOptions2>-XX:MaxPermSize=384m</memoryOptions2>
     <swt.bot.test.record.screencast>false</swt.bot.test.record.screencast>
     <pauseFailedTest>false</pauseFailedTest>
@@ -63,7 +64,7 @@
 	</os>
       </activation>
       <properties>
-	<memoryOptions1>-Xms384m -Xmx768m -XX:PermSize=192m</memoryOptions1>
+	<memoryOptions1>-Xms512m -Xmx1024m -XX:PermSize=192m</memoryOptions1>
 	<memoryOptions2>-XX:MaxPermSize=384m</memoryOptions2>
       </properties>
     </profile>
