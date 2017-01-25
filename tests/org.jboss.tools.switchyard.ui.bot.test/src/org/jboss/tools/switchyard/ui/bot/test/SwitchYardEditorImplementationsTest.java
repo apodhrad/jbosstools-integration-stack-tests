@@ -124,7 +124,7 @@ public class SwitchYardEditorImplementationsTest {
 		}
 	}
 
-	@Test
+	//@Test
 	public void addBeanImplementationWithNewJavaInterfaceTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		BeanServiceWizard beanWizard = editor.addBeanImplementation();
@@ -146,7 +146,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkComponentProperties("NewBeanImpl", "NewBeanImpl");
 	}
 
-	@Test
+	//@Test
 	public void addCamelJavaImplementationWithNewJavaInterfaceTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		CamelJavaServiceWizard camelJavaWizard = editor.addCamelJavaImplementation();
@@ -169,7 +169,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkComponentProperties("NewCamelJavaImpl", "NewCamelJavaImpl");
 	}
 
-	@Test
+	//@Test
 	public void addCamelXMLImplementationWithNewJavaInterfaceTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		CamelXMLServiceWizard camelXMLWizard = editor.addCamelXMLImplementation();
@@ -192,7 +192,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkComponentProperties("NewCamelXMLImpl", "NewCamelXMLImpl");
 	}
 
-	@Test
+	//@Test
 	public void addExistingCamelXMLImplementationTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		SwitchYardComponent component = editor.addComponent();
@@ -211,7 +211,7 @@ public class SwitchYardEditorImplementationsTest {
 				editor.xpath("/switchyard/composite/component/implementation.camel/xml/@path"));
 	}
 
-	@Test
+	//@Test
 	public void addBPELImplementationWithNewWSDLInterfaceTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		BPELServiceWizard bpelWizard = editor.addBPELImplementation();
@@ -233,7 +233,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkComponentProperties("NewBPELImpl", "NewBPELImpl");
 	}
 
-	@Test
+	//@Test
 	public void addExistingBPELImplementationTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
 		SwitchYardComponent component = editor.addComponent();
@@ -278,7 +278,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkBPMAdvancedProperties("NewBPMNImpl");
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportBPMN.class)
 	public void addExistingBPMNImplementationTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -304,7 +304,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkBPMOperationsProperties("Component", "operation2", "SIGNAL_EVENT");
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportBPMN.class)
 	public void addExistingBPMNImplementationWithKnowledgeContainerTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -342,7 +342,7 @@ public class SwitchYardEditorImplementationsTest {
 		assertEquals("12345", editor.xpath(XPATH_BPM + "/manifest/container/@scanInterval"));
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportBPMN.class)
 	public void addExistingBPMNImplementationWithRemoteJMSTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -398,7 +398,7 @@ public class SwitchYardEditorImplementationsTest {
 		assertEquals("truststorePass", editor.xpath(XPATH_BPM + "/manifest/remoteJms/@truststorePassword"));
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportBPMN.class)
 	public void addExistingBPMNImplementationWithRemoteRESTTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -456,7 +456,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkDroolsAdvancedProperties("NewDroolsImpl");
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportDrools.class)
 	public void addExistingDroolsImplementationTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -482,7 +482,7 @@ public class SwitchYardEditorImplementationsTest {
 		checkDroolsOperationsProperties("Component", "operation2", "INSERT");
 	}
 
-	@Test
+	//@Test
 	@RunIf(conditionClass = SwitchYardRequirementSupportDrools.class)
 	public void addExistingDroolsImplementationWithKnowledgeContainerTest() throws Exception {
 		SwitchYardEditor editor = new SwitchYardEditor();
@@ -520,7 +520,7 @@ public class SwitchYardEditorImplementationsTest {
 		assertEquals("12345", editor.xpath(XPATH_RULES + "/manifest/container/@scanInterval"));
 	}
 
-	@Test
+	//@Test
 	@Ignore("Removed as a part of SWITCHYARD-2817")
 	@RunIf(conditionClass = SwitchYardRequirementSupportDrools.class)
 	public void addExistingDroolsImplementationWithRemoteJMSTest() throws Exception {
@@ -577,7 +577,7 @@ public class SwitchYardEditorImplementationsTest {
 		assertEquals("truststorePass", editor.xpath(XPATH_RULES + "/manifest/remoteJms/@truststorePassword"));
 	}
 
-	@Test
+	//@Test
 	@Ignore("Removed as a part of SWITCHYARD-2817")
 	@RunIf(conditionClass = SwitchYardRequirementSupportDrools.class)
 	public void addExistingDroolsImplementationWithRemoteRESTTest() throws Exception {
