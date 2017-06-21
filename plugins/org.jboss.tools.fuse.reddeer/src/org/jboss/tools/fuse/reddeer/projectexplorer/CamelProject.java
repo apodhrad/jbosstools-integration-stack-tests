@@ -2,6 +2,9 @@ package org.jboss.tools.fuse.reddeer.projectexplorer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Pattern;
 
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -28,6 +31,7 @@ import org.jboss.reddeer.swt.impl.menu.ContextMenu;
 import org.jboss.reddeer.swt.impl.shell.DefaultShell;
 import org.jboss.reddeer.swt.impl.text.LabeledText;
 import org.jboss.reddeer.workbench.impl.shell.WorkbenchShell;
+import org.jboss.tools.common.reddeer.XPathEvaluator;
 import org.jboss.tools.fuse.reddeer.editor.CamelEditor;
 import org.jboss.tools.fuse.reddeer.wizard.CamelXmlFileWizard;
 
@@ -158,7 +162,8 @@ public class CamelProject {
 	 */
 	private static void closeSecureStorage() {
 		try {
-			new WaitUntil(new ShellWithTextIsAvailable(new WithTextMatcher(new RegexMatcher("Secure Storage.*"))), TimePeriod.NORMAL);
+			new WaitUntil(new ShellWithTextIsAvailable(new WithTextMatcher(new RegexMatcher("Secure Storage.*"))),
+					TimePeriod.NORMAL);
 		} catch (RuntimeException ex1) {
 			return;
 		}
@@ -281,4 +286,22 @@ public class CamelProject {
 			return null;
 		}
 	}
+
+	public List<String> getDependencies() {
+		List<String> deps = new ArrayList<>();
+		XPathEvaluator xpath = new XPathEvaluator(getPomFile());
+		String numberOfDepsResult = xpath.evaluateString("count(/project/dependencies/dependency)");
+		int numberOfDeps = 0;
+		if (Pattern.compile("[0-9]+").matcher(numberOfDepsResult).matches()) {
+			numberOfDeps = Integer.valueOf(numberOfDepsResult);
+		}
+		for (int i = 1; i <= numberOfDeps; i++) {
+			String groupId = xpath.evaluateString("/project/dependencies/dependency[" + i + "]/groupId");
+			String artifactId = xpath.evaluateString("/project/dependencies/dependency[" + i + "]/artifactId");
+			String version = xpath.evaluateString("/project/dependencies/dependency[" + i + "]/version");
+			deps.add(groupId + "/" + artifactId + "/" + version);
+		}
+		return deps;
+	}
+
 }

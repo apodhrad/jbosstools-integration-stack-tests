@@ -27,6 +27,7 @@ import org.jboss.reddeer.swt.api.Combo;
 import org.jboss.reddeer.swt.api.Text;
 import org.jboss.reddeer.swt.exception.SWTLayerException;
 import org.jboss.reddeer.swt.impl.button.PushButton;
+import org.jboss.reddeer.swt.impl.ccombo.LabeledCCombo;
 import org.jboss.reddeer.swt.impl.combo.DefaultCombo;
 import org.jboss.reddeer.swt.impl.ctab.DefaultCTabItem;
 import org.jboss.reddeer.swt.impl.menu.ContextMenu;
@@ -556,16 +557,17 @@ public class CamelEditor extends GEFEditor {
 	 * @param value
 	 *            value of the property
 	 */
-	public void setComboProperty(String component, int position, String value) {
+	public void setComboProperty(String component, String label, String value) {
 
-		log.debug("Setting '" + value + "' as the property number '" + position
+		log.debug("Setting '" + value + "' as the property number '" + label
 				+ "' of selelected component in the Camel Editor");
 		PropertiesView properties = new PropertiesView();
 		properties.open();
 		selectEditPart(component);
 		properties.activate();
-		properties.selectTab("Generic");
-		new DefaultCombo(position).setText(value);
+		properties.selectTab("Details");
+		System.out.println(new LabeledCCombo(label).getItems());
+		new LabeledCCombo(label).setSelection(value);
 		activate();
 		AbstractWait.sleep(TimePeriod.SHORT);
 	}

@@ -14,7 +14,7 @@ public class Marshal implements CamelComponent {
 
 	@Override
 	public String getLabel() {
-		return "marshal";
+		return "Marshal";
 	}
 
 	@Override
