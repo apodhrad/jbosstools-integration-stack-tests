@@ -92,6 +92,7 @@ public class GEFProcessEditor extends GEFEditor {
 
 	public org.eclipse.reddeer.gef.api.EditPart addElementFromPalette(ElementType type, final int x, final int y,
 			final EditPart parent) {
+		/*
 		int oldCount = getNumberOfEditParts();
 
 		final ViewerListener viewerListener = new ViewerListener();
@@ -104,14 +105,16 @@ public class GEFProcessEditor extends GEFEditor {
 
 		getPalette().activateTool(type.toToolPath()[1], type.toToolPath()[0]);
 		click(x, y);
-
+		
 		new WaitUntil(new EditorHasEditParts(this, oldCount));
 
 		if (viewerListener.getAddedEditPart() == null) {
 			throw new GEFLayerException("No new edit part was detected");
 		}
+		*/
+		org.eclipse.reddeer.gef.api.EditPart editPart = addToolFromPalette(type.toToolPath()[1], type.toToolPath()[0], x, y);
 
-		return new AbsoluteEditPart(viewerListener.getAddedEditPart());
+		return new AbsoluteEditPart(editPart.getGEFEditPart());
 	}
 
 	public org.eclipse.reddeer.gef.api.EditPart addConnectionFromPalette(ConnectionType connectionType, Element from,
