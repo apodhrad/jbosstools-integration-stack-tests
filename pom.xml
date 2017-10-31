@@ -18,6 +18,7 @@
 		<jbtis.repo>staging</jbtis.repo>
 		<orbit.site>${jbosstools.url}/updates/requirements/orbit/S20170516192513/</orbit.site>
 		<fuse.site>${jbosstools.url}/oxygen/snapshots/builds/jbosstools-fuse_master/</fuse.site>
+		<reddeer.site>http://tooling.fuse-qe.eng.rdu2.redhat.com/p2/download.jboss.org/jbosstools/updates/requirements/reddeer/2.0.1-SNAPSHOT/</reddeer.site>
 		<switchyard.site>${jbosstools.url}/oxygen/integration/updates/integration-stack/switchyard/2.4.0.CI/</switchyard.site>
 		<skipRequirements>${skipTests}</skipRequirements>
 		<!-- Need to specify a stable version of tycho plugin -->
@@ -66,6 +67,12 @@
 			<releases>
 				<enabled>true</enabled>
 			</releases>
+		</repository>
+		<!-- RedDeer Update Site -->
+		<repository>
+			<id>reddeer-site</id>
+			<url>${reddeer.site}</url>
+			<layout>p2</layout>
 		</repository>
 		<!-- Eclipse Orbit Update Site -->
 		<repository>
